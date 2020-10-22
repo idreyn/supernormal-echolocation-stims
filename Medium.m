@@ -7,6 +7,14 @@ classdef Medium < handle
     end
     
     methods
+        function struct = get_struct(medium)
+            arguments
+                medium Medium
+            end
+            struct.density = medium.density;
+            struct.sound_speed = medium.sound_speed;
+        end
+        
         function apply_mask(medium, material, mask)
             arguments
                 medium Medium
@@ -15,8 +23,7 @@ classdef Medium < handle
             end
             medium.density(mask == 1) = material.density;
             medium.sound_speed(mask == 1) = material.sound_speed;
-        end
-        
+        end 
         
         function medium = Medium(params, air)
             arguments

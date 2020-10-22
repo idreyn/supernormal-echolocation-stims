@@ -10,8 +10,35 @@ classdef Parameters
     end
     
     methods
+        function point_gp = m_point_to_grid(params, point)
+            arguments
+                params Parameters
+                point (1,2)
+            end
+            point_gp = [
+                params.Ny / 2 - m_to_grid_points(params, point(2))
+                params.Nx / 2 + m_to_grid_points(params, point(1))
+           ];
+        end
+        
+        function point_gp = m_polar_to_grid(params, distance_m, angle_deg)
+            arguments
+                params Parameters
+                distance_m double {mustBePositive}
+                angle_deg double
+            end
+            angle_normalized_rad = (90 - angle_deg) * (pi / 180);
+            x_m = distance_m * cos(angle_normalized_rad);
+            y_m = distance_m * sin(angle_normalized_rad);
+            point_gp = m_point_to_grid(params, [x_m, y_m]);
+        end
+        
         function points = m_to_grid_points(params, meters)
-            points = meters / params.grid_resolution_m;
+            points = round(meters / params.grid_resolution_m);
+        end
+        
+        function meters = grid_points_to_m(params, grid_points)
+            meters = params.grid_resolution_m * grid_points;
         end
         
         function params = Parameters(max_freq_hz, grid_size_m, desired_grid_resolution_m, c_0)
@@ -32,6 +59,7 @@ classdef Parameters
             params.grid_resolution_m = grid_resolution_m;
             params.c_0 = c_0;
             params.grid = kWaveGrid(grid_points, grid_resolution_m, grid_points, grid_resolution_m);
+            params.grid.t_array = 0 : (1e-7) : 1e-3;
         end
     end
 end
