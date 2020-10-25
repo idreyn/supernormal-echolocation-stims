@@ -1,4 +1,4 @@
-params = Parameters(1e4, 1, 0.01);
+params = Parameters(5e4, 1, 0.005);
 air = Material(343, 1.225);
 water = Material(1480, 1000);
 plastic = Material(2170, 1070);
@@ -16,6 +16,6 @@ apply_mask(medium, plastic, headband);
 
 sensor_mask = make_sensor_mask(params, head_radius_m + headband_thickness_m + 0.001, 45);
 sensor = make_sensor(sensor_mask);
-source = make_impulse_source(params, 0.3, 0, 100);
+source = make_impulse_source(params, 0.15, 0, 1e3);
 
-sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor, 'RecordMovie', true);
+sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
