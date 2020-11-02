@@ -3,7 +3,7 @@ headband_thickness_m = 0.01;
 head_and_headband_radius_m = head_radius_m + headband_thickness_m;
 
 grid_resolution_hz = 5e4;
-grid_resolution_m = 0.0002;
+grid_resolution_m = 0.002;
 
 impulse_heading = 0;
 impulse_radius_m = 1;
