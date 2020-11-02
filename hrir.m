@@ -22,4 +22,9 @@ sensor = make_sensor(sensor_mask);
 source = make_impulse_source(params, impulse_radius_m, 0, 1e3);
 
 set_timestep_from_medium(params, medium);
-sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
+
+if ispc
+    sensor_data = kspaceFirstOrder2DG(params.grid, get_struct(medium), source, sensor);
+else
+    sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
+end
