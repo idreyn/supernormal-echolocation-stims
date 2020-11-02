@@ -1,5 +1,5 @@
 head_radius_m = 0.09;
-headband_thickness_m = 0.0005;
+headband_thickness_m = 0.01;
 head_and_headband_radius_m = head_radius_m + headband_thickness_m;
 
 grid_resolution_hz = 5e4;
@@ -11,7 +11,7 @@ impulse_pressure_pa = 1e3;
 
 simulation_radius_m = impulse_radius_m * 1.25;
 
-sensor_headings = 0:1:359;
+sensor_headings = 0:0.1:359;
 
 air = Material(343, 1.225);
 water = Material(1480, 1000);
