@@ -85,7 +85,7 @@ classdef Parameters
             c_ref = medium.sound_speed_ref;
             dt_limit = 2 / (c_ref * k_max) * asin(c_ref / c_max);
             dt = 0.5 * dt_limit
-            params.grid.setTime(2000, dt);
+            params.grid.setTime(round(params.t_end_s / dt), dt);
         end
     end
 end
