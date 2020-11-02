@@ -7,7 +7,7 @@ air = Material(343, 1.225);
 water = Material(1480, 1000);
 plastic = Material(2170, 1070);
 
-params = Parameters(5e4, 2 * impulse_radius_m + 0.01, 0.0001);
+params = Parameters(5e4, 2 * impulse_radius_m + 0.01, 0.001);
 medium = Medium(params, air);
 
 head_radius =  m_to_grid_points(params, head_radius_m);

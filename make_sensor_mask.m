@@ -10,8 +10,8 @@ function mask = make_sensor_mask(params, offset_radius_m, sensor_headings)
         point = m_polar_to_grid(params, offset_radius_m_corrected, heading);
         mask(make_point_mask(params, point) == 1) = 1;
     end
-    expected_points = size(sensor_headings, 2)
-    actual_points = sum(sum(mask))
+    expected_points = size(sensor_headings, 2);
+    actual_points = sum(sum(mask));
     if expected_points ~= actual_points
         error("Grid is not fine enough for given sensor_headings");
     end
