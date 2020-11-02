@@ -28,3 +28,18 @@ if ispc
 else
     sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
 end
+
+sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
+
+
+mkdir('data');
+filename = strcat('data/hrir-', datestr(now,'yyyy-mm-dd-HHMMSS'), '.h5');
+
+h5create(filename, '/impulse', size(source.p));
+h5write(filename, '/impulse', source.p);
+
+h5create(filename, '/time', size(params.grid.t_array));
+h5write(filename, '/time', params.grid.t_array);
+
+h5create(filename, '/hrir', size(sensor_data_reordered));
+h5write(filename, '/hrir', sensor_data_reordered);
