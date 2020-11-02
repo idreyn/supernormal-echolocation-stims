@@ -1,4 +1,3 @@
-medium = Medium(params, air);
 head_radius_m = 0.09;
 headband_thickness_m = 0.01;
 head_and_headband_radius_m = head_radius_m + headband_thickness_m;
@@ -9,6 +8,7 @@ water = Material(1480, 1000);
 plastic = Material(2170, 1070);
 
 params = Parameters(5e4, 2 * impulse_radius_m + 0.01, 0.1);
+medium = Medium(params, air);
 
 head_radius =  m_to_grid_points(params, head_radius_m);
 head = makeDisc(params.Nx, params.Ny, params.Nx/2, params.Ny/2, head_radius);
