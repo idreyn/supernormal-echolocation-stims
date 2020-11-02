@@ -9,7 +9,6 @@ impulse_radius_m = 0.3;
 head_radius =  m_to_grid_points(params, head_radius_m);
 
 [parabola_mask, focus_gp] = make_parabolic_mask(params, 0, 0, 0.1, 45);
-imagesc(parabola_mask);
 
 focus_mask = make_point_mask(params, focus_gp);
 sensor = make_sensor(focus_mask);
@@ -23,4 +22,4 @@ source = make_impulse_source(params, 0.5, 30, 1e4);
 
 apply_mask(medium, plastic, parabola_mask);
 
-sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor, 'RecordMovie', true, 'MovieProfile', 'MPEG-4');
+sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);

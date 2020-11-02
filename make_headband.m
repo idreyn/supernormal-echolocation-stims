@@ -11,5 +11,4 @@ function mask = make_headband(params, head_radius_m, headband_thickness_m)
     head = makeDisc(params.Nx, params.Ny, params.Nx/2, params.Ny/2, head_radius_gp);
     mask(head_plus_band == 1) = 1;
     mask(head == 1) = 0;
-    mask(params.Ny/2:params.Ny, 1:params.Nx) = 0;
 end

@@ -6,7 +6,8 @@ classdef Parameters
         c_0 {mustBeNumeric} % Speed of sound (m/s)
         Nx {mustBeNumeric} % Total points on x-axis of grid
         Ny {mustBeNumeric} % Total points on y-axis of grid
-        grid
+        grid % k-Wave grid
+        t_end_s {mustBeNumeric} % End of simulation (s)
     end
     
     methods
@@ -65,12 +66,26 @@ classdef Parameters
             min_grid_points = grid_size_m / min(desired_grid_resolution_m, min_grid_resolution_m);
             grid_points = 2 ^ ceil(log2(min_grid_points));
             grid_resolution_m = grid_size_m / grid_points;
+            
             params.Nx = grid_points;
             params.Ny = grid_points;
             params.grid_resolution_m = grid_resolution_m;
             params.c_0 = c_0;
             params.grid = kWaveGrid(grid_points, grid_resolution_m, grid_points, grid_resolution_m);
-            params.grid.t_array = 0 : (1e-8) : 1e-3;
+            params.t_end_s = params.grid_size_m * sqrt(2) / c_0;
+        end
+        
+        function set_timestep_from_medium(params, medium)
+            arguments
+                params Parameters
+                medium Medium
+            end
+            k_max = max(params.grid.k(:));
+            c_max = medium.sound_speed_max;
+            c_ref = medium.sound_speed_ref;
+            dt_limit = 2 / (c_ref * k_max) * asin(c_ref / c_max);
+            dt = 0.5 * dt_limit
+            params.grid.setTime(2000, dt);
         end
     end
 end
