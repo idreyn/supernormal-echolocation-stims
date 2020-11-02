@@ -3,7 +3,7 @@ headband_thickness_m = 0.01;
 head_and_headband_radius_m = head_radius_m + headband_thickness_m;
 
 grid_resolution_hz = 5e4;
-grid_resolution_m = 0.001;
+grid_resolution_m = 0.0002;
 
 impulse_heading = 0;
 impulse_radius_m = 1;
@@ -27,11 +27,11 @@ apply_mask(medium, water, head);
 headband = make_headband(params, head_radius_m, headband_thickness_m);
 apply_mask(medium, plastic, headband);
 
+set_timestep_from_medium(params, medium);
+
 sensor_mask = make_sensor_mask(params, head_and_headband_radius_m, sensor_headings);
 sensor = make_sensor(sensor_mask);
 source = make_impulse_source(params, impulse_radius_m, impulse_heading, impulse_pressure_pa);
-
-set_timestep_from_medium(params, medium);
 
 if ispc
     sensor_data = kspaceFirstOrder2DG(params.grid, get_struct(medium), source, sensor);
