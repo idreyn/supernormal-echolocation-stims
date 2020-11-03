@@ -13,7 +13,7 @@ simulation_radius_m = impulse_radius_m * 1.25;
 
 sensor_headings = 0:1:359;
 
-air = Material(343, 1.225, 0.01);
+air = Material(343, 1.225, 10);
 water = Material(1480, 1000, 0);
 plastic = Material(2170, 1070, 0);
 
@@ -39,18 +39,4 @@ else
     sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
 end
 
-sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
-imagesc(sensor_data_reordered);
-
-
-mkdir('data');
-filename = strcat('data/hrir-', datestr(now,'yyyy-mm-dd-HHMMSS'), '.h5');
-
-h5create(filename, '/impulse', size(source.p));
-h5write(filename, '/impulse', source.p);
-
-h5create(filename, '/time', size(params.grid.t_array));
-h5write(filename, '/time', params.grid.t_array);
-
-h5create(filename, '/hrir', size(sensor_data_reordered));
-h5write(filename, '/hrir', sensor_data_reordered);
+save_hrir(params.grid, sensor, sensor_data, 192000);
