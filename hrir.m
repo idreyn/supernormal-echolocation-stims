@@ -13,9 +13,9 @@ simulation_radius_m = impulse_radius_m * 1.25;
 
 sensor_headings = 0:1:359;
 
-air = Material(343, 1.225);
-water = Material(1480, 1000);
-plastic = Material(2170, 1070);
+air = Material(343, 1.225, 1.64, 0.01);
+water = Material(1480, 1000, 0);
+plastic = Material(2170, 1070, 0);
 
 params = Parameters(grid_resolution_hz, 2 * simulation_radius_m, grid_resolution_m);
 medium = Medium(params, air);
