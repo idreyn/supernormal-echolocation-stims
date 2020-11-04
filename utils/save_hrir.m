@@ -1,4 +1,4 @@
-function save_hrir(kgrid, sensor, sensor_data, fs)
+function sensor_data_resampled = save_hrir(kgrid, sensor, sensor_data, fs)
     f0 = round(1 / (kgrid.t_array(2) - kgrid.t_array(1)));
     sensor_data_reordered = reorderSensorData(kgrid, sensor, sensor_data);
     sensor_data_resampled = resample(sensor_data_reordered', fs, f0)';
@@ -13,4 +13,3 @@ function save_hrir(kgrid, sensor, sensor_data, fs)
     h5create(filename, '/hrir', size(sensor_data_resampled));
     h5write(filename, '/hrir', sensor_data_resampled);
 end
-        

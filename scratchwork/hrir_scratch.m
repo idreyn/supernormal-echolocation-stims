@@ -39,4 +39,4 @@ else
     sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
 end
 
-save_hrir(params.grid, sensor, sensor_data, 192000);
+imagesc(reorderSensorData(params.grid, sensor, sensor_data));
