@@ -23,10 +23,6 @@ function [mask, focus_gp] = make_parabolic_mask(params, focus_x_m, focus_y_m, fo
            if w > boundary
                mask(j, i) = 1;
            end
-           if i == focus_gp(2) && j == focus_gp(1)
-               mask(j, i) = 2;
-           end
         end
     end
-    imagesc(mask);
 end
