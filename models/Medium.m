@@ -5,6 +5,8 @@ classdef Medium < handle
         sound_speed_ref
         sound_speed_max
         density
+        alpha_coeff
+        alpha_power
     end
     
     methods
@@ -35,6 +37,8 @@ classdef Medium < handle
             medium.params = params;
             medium.sound_speed = zeros(params.Nx, params.Ny) + air.sound_speed;
             medium.density = zeros(params.Nx, params.Ny) + air.density;
+            medium.alpha_coeff = 10000;
+            medium.alpha_power = 2;
             medium.sound_speed_ref = air.sound_speed;
             medium.sound_speed_max = air.sound_speed;
         end

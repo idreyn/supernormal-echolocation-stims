@@ -72,7 +72,7 @@ classdef Parameters
             params.grid_resolution_m = grid_resolution_m;
             params.c_0 = c_0;
             params.grid = kWaveGrid(grid_points, grid_resolution_m, grid_points, grid_resolution_m);
-            params.t_end_s = params.grid_size_m * sqrt(2) / c_0;
+            params.t_end_s = 0.5 * params.grid_size_m * sqrt(2) / c_0;
         end
         
         function set_timestep_from_medium(params, medium)
