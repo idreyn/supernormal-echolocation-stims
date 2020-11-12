@@ -38,9 +38,6 @@ function [fs, hrirs] = get_hrirs_for_directional_headband(notch_offset_m, notch_
     sensor = make_sensor_ring(params, sensor_radius, sensor_headings);
     source = make_impulse_source(params, focus_mask, impulse_pressure_pa);
     
-    imagesc(headband + 2 * focus_mask + 3 * sensor.mask + 2 * skull);
-    pause(60);
-    
     if ispc
         sensor_data = kspaceFirstOrder2DG(params.grid, get_struct(medium), source, sensor);
     else
