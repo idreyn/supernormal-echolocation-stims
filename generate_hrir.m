@@ -7,7 +7,7 @@ grid_resolution_m = 0.002;
 
 impulse_heading = 0;
 impulse_radius_m = 1;
-impulse_pressure_pa = 1e1;
+impulse_pressure_pa = 1e3;
 
 simulation_radius_m = impulse_radius_m * 1.25;
 
@@ -43,4 +43,5 @@ else
     sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor);
 end
 
-hrirs = save_hrir(params.grid, sensor, sensor_data, 192000);
+sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
+hrirs = save_hrir(params, sensor_data, 192000);
