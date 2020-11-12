@@ -49,7 +49,7 @@ function [fs, hrirs] = get_hrirs_for_directional_headband(notch_offset_m, notch_
     else
         sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor, 'DataCast', 'single');
     end
-
+    
     sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
     hrirs = save_hrir(params, sensor_data_reordered, fs, f_pass);
     
