@@ -1,10 +1,16 @@
-function [fs, hrirs] = get_hrirs_for_directional_headband(notch_offset_m, notch_focal_width_m, notch_heading_deg)
-    head_radius_m = 0.09;
+function [fs, hrirs] = get_hrirs_for_directional_headband(notch_offset_m, notch_focal_width_m, notch_heading_deg, grid_resolution_m)
+    arguments
+        notch_offset_m
+        notch_focal_width_m
+        notch_heading_deg
+        grid_resolution_m = 0.01;
+    end
+    
+    head_radius_m = 0.0875;
     headband_thickness_m = 0.02;
     skull_thickness = 0.005;
 
     grid_resolution_hz = 5e4;
-    grid_resolution_m = 0.01;
     grid_radius_m = 1.2;
     
     fs = 192000;
@@ -48,8 +54,10 @@ function [fs, hrirs] = get_hrirs_for_directional_headband(notch_offset_m, notch_
     hrirs = save_hrir(params, sensor_data_reordered, fs, f_pass);
     
     figure
-    subplot(211)
+    subplot(311)
     plot_gain(sensor_headings, hrirs)
-    subplot(212)
+    subplot(312)
     plot_ild_by_separation(fs, hrirs)
+    subplot(313)
+    imagesc(headband + 2 * focus_mask)
 end
