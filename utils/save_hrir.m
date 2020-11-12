@@ -1,7 +1,5 @@
-function sensor_data_resampled = save_hrir(kgrid, sensor, sensor_data, fs)
-    f0 = round(1 / (kgrid.t_array(2) - kgrid.t_array(1)));
-    sensor_data_reordered = cast(reorderSensorData(kgrid, sensor, sensor_data), 'double');
-    sensor_data_resampled = resample(sensor_data_reordered', fs, f0)';
+function sensor_data_resampled = save_hrir(params, sensor_data_reordered, fs, f_pass)
+    sensor_data_resampled = resample_hrir(params, sensor_data_reordered, fs, f_pass);
     
     mkdir('data');
     filename = strcat('data/hrir-', datestr(now,'yyyy-mm-dd-HHMMSS'), '.h5');
