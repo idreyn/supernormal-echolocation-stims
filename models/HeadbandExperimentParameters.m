@@ -3,7 +3,7 @@ classdef HeadbandExperimentParameters
         simulation_resolution_m {mustBeNumeric} = 0.01
         simulation_resolution_hz {mustBeNumeric} = 5e4;
         sensor_radius_m {mustBeNumeric} = 1
-        head_radius_m {mustBeNumeric} = 0.00875
+        head_radius_m {mustBeNumeric} = 0.0875
         skull_thickness_m {mustBeNumeric} = 0.005
         headband_thickness_m {mustBeNumeric} = 0.02
         headings_deg (1,:) = 0:1:359

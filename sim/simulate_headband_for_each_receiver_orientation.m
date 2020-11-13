@@ -1,4 +1,4 @@
-function simulate_headband_for_each_receiver_orientation(experiment_params)
+function all_hrirs = simulate_headband_for_each_receiver_orientation(experiment_params)
     arguments
         experiment_params HeadbandExperimentParameters
     end
@@ -14,8 +14,8 @@ function simulate_headband_for_each_receiver_orientation(experiment_params)
     end
 
     hrir_size = size(notch_hrirs_ca{1});
-    notch_hrirs = zeros(num_notch_headings, hrir_size(1), hrir_size(2));
+    all_hrirs = zeros(num_notch_headings, hrir_size(1), hrir_size(2));
     for i = 1:num_notch_headings
-        notch_hrirs(i, :, :) = notch_hrirs_ca{i};
+        all_hrirs(i, :, :) = notch_hrirs_ca{i};
     end
 end
