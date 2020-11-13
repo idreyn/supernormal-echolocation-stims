@@ -44,7 +44,7 @@ function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_
     end
     
     sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
-    hrirs = save_hrir(params, sensor_data_reordered, experiment_params.fs_hz, experiment_params.f_pass_hz);
+    hrirs = resample_hrir(params, sensor_data_reordered, experiment_params.fs_hz, experiment_params.f_pass_hz);
     
     if debug_plot
         figure

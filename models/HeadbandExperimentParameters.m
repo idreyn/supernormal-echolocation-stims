@@ -13,6 +13,7 @@ classdef HeadbandExperimentParameters
         impulse_pressure_pa {mustBeNumeric} = 1e3
         fs_hz {mustBeNumeric} = 192000 % Sampling rate used when working with audio
         f_pass_hz {mustBeNumeric} = 20000 % Minimum frequency of ultrasound
+        noise_length_samples {mustBeNumeric} = 0
     end
 end
 

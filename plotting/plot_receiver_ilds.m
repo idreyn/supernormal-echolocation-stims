@@ -16,10 +16,10 @@ function plot_receiver_ilds(head_radius_m, receiver_orientations, hrirs, compens
 
     for i = 1:num_orientations
         for heading = headings
-            [left_heading, right_heading] = get_receiver_headings(heading, compensation_factor);
+            [left_index, right_index] = get_receiver_indices(heading, compensation_factor);
 
-            left_hrir = hrirs(i, left_heading + 1, :); 
-            right_hrir = hrirs(num_orientations - i + 1, right_heading + 1, :);
+            left_hrir = hrirs(i, left_index + 1, :); 
+            right_hrir = hrirs(num_orientations - i, right_index, :);
 
             left_power = sum(left_hrir .^ 2);
             right_power = sum(right_hrir .^ 2);
