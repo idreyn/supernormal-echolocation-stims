@@ -31,7 +31,7 @@ classdef Medium < handle
         
         function medium = Medium(params, air)
             arguments
-                params Parameters
+                params SimulationParameters
                 air Material
             end
             medium.params = params;
