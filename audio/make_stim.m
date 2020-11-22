@@ -1,30 +1,36 @@
-function stim_realtime = make_stim(hrirs, fs, speed_of_sound, pulse, heading, stretch_factor, compensation, orientation_index)
+function stim_realtime = make_stim( ...
+    hrirs, ... 
+    fs, ...
+    pulse, ...
+    hrir_included_distance_m, ...
+    target_distance_m, ...
+    target_azimuth_deg, ...
+    slowdown_factor, ...
+    compensation_factor, ...
+    orientation_index)
     arguments
         hrirs (:,:,:)
         fs {mustBeNumeric}
-        speed_of_sound {mustBeNumeric}
-        pulse (1,:)
-        heading {mustBeNumeric}
-        stretch_factor {mustBeNumeric}
-        compensation {mustBeNumeric}
+        pulse Pulse
+        hrir_included_distance_m {mustBeNumeric}
+        target_distance_m {mustBeNumeric}
+        target_azimuth_deg {mustBeNumeric}
+        slowdown_factor {mustBeNumeric}
+        compensation_factor {mustBeNumeric}
         orientation_index {mustBeNumeric}
     end
-    pulse_waveform = render_pulse(pulse, fs);
-    pulse_wait_time_s = 1 / speed_of_sound;
-    [left_receiver_index, right_receiver_index] = get_receiver_indices(heading, compensation);
-    [left_orientation_index, right_orientation_index] = get_orientation_indices(hrirs, orientation_index);
-    channels = {[],[]};
-    channel_index = 1;
-    indices = {{right_orientation_index, right_receiver_index},{left_orientation_index, left_receiver_index}};
-    for i = 1:2
-        hrir = squeeze(hrirs(indices{i}{1}, indices{i}{2}, :));
-        echo = conv(hrir, pulse_waveform);
-        channels{channel_index} = layer_audio(fs, 0, 0 * pulse_waveform, pulse_wait_time_s, echo);
-        plot(i + channels{channel_index});
-        hold on
-        channel_index = channel_index + 1;
+    if target_distance_m < hrir_included_distance_m
+        error("stim cannot be created at near-field distance");
     end
-    stim_realtime = [channels{1}; channels{2}];
-    stim = resample(stim_realtime', stretch_factor, 1)';
+    echo_delay_s = (2 * target_distance_m - hrir_included_distance_m) / 343;
+    [left_receiver_index, right_receiver_index] = get_receiver_indices(target_azimuth_deg, compensation_factor);
+    [left_orientation_index, right_orientation_index] = get_orientation_indices(hrirs, orientation_index);
+    stim_realtime = make_stim_from_hrirs( ...
+        fs, ...
+        squeeze(hrirs(left_orientation_index, left_receiver_index, :)), ...
+        squeeze(hrirs(right_orientation_index, right_receiver_index, :)), ...
+        pulse, ...
+        echo_delay_s);
+    stim = resample(stim_realtime', slowdown_factor, 1)';
     soundsc(stim, fs);
 end
