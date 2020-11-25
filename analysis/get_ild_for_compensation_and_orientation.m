@@ -18,6 +18,6 @@ function ild = get_ild_for_compensation_and_orientation(hrirs, compensation_fact
         left_power = sum(left_hrir .^ 2);
         right_power = sum(right_hrir .^ 2);
 
-        ild(heading + 1) = 10 * log10(left_power / right_power);
+        ild(heading + 1) = 10 * log10(right_power / left_power);
     end
 end

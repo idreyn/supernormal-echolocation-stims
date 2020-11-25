@@ -36,6 +36,11 @@ function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_
 
     sensor = make_sensor_ring(params, experiment_params.sensor_radius_m, experiment_params.headings_deg);
     source = make_impulse_source(params, focus_mask, experiment_params.impulse_pressure_pa);
+   
+    if debug_plot
+        imagesc(headband)
+        pause(60);
+    end
     
     if ispc
         sensor_data = kspaceFirstOrder2DG(params.grid, get_struct(medium), source, sensor);

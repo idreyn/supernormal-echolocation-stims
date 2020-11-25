@@ -24,5 +24,13 @@ classdef Pulse
             time = 0 : (1 / fs) : pulse.duration_s - (1 / fs);
             arr = chirp(time, pulse.f0, pulse.duration_s, pulse.f1, pulse.kind);
         end
+        
+        function slow_pulse = apply_slowdown_factor(pulse, slowdown)
+            slow_pulse = Pulse( ...
+                pulse.f0 / slowdown, ...
+                pulse.f1 / slowdown, ...
+                pulse.duration_s * slowdown, ...
+                pulse.kind);
+        end
     end
 end
