@@ -15,6 +15,9 @@ classdef Medium < handle
             end
             struct.density = medium.density;
             struct.sound_speed = medium.sound_speed;
+            struct.sound_speed_ref = medium.sound_speed;
+            struct.alpha_power = medium.alpha_power;
+            struct.alpha_coeff = medium.alpha_coeff;
         end
         
         function apply_mask(medium, material, mask)
@@ -36,6 +39,8 @@ classdef Medium < handle
             medium.sound_speed = zeros(params.Nx, params.Ny) + air.sound_speed;
             medium.sound_speed_ref = air.sound_speed;
             medium.density = zeros(params.Nx, params.Ny) + air.density;
+            medium.alpha_coeff = 1.64;
+            medium.alpha_power = 1;
         end
     end
 end
