@@ -40,7 +40,7 @@ classdef Medium < handle
             medium.sound_speed_ref = air.sound_speed;
             medium.density = zeros(params.Nx, params.Ny) + air.density;
             medium.alpha_coeff = 1.64;
-            medium.alpha_power = 1;
+            medium.alpha_power = 1.001;
         end
     end
 end
