@@ -2,11 +2,10 @@ classdef Medium < handle
     properties
         params
         sound_speed
-        sound_speed_ref
-        sound_speed_max
         density
         alpha_coeff
         alpha_power
+        sound_speed_ref
     end
     
     methods
@@ -24,7 +23,6 @@ classdef Medium < handle
                 material Material
                 mask (:,:) {mustBeNumeric}
             end
-            medium.sound_speed_max = max(medium.sound_speed_max, material.sound_speed);
             medium.density(mask == 1) = material.density;
             medium.sound_speed(mask == 1) = material.sound_speed;
         end 
@@ -36,9 +34,8 @@ classdef Medium < handle
             end
             medium.params = params;
             medium.sound_speed = zeros(params.Nx, params.Ny) + air.sound_speed;
-            medium.density = zeros(params.Nx, params.Ny) + air.density;
             medium.sound_speed_ref = air.sound_speed;
-            medium.sound_speed_max = air.sound_speed;
+            medium.density = zeros(params.Nx, params.Ny) + air.density;
         end
     end
 end
