@@ -15,7 +15,7 @@ classdef Medium < handle
             end
             struct.density = medium.density;
             struct.sound_speed = medium.sound_speed;
-            struct.sound_speed_ref = medium.sound_speed;
+            struct.sound_speed_ref = medium.sound_speed_ref;
             struct.alpha_power = medium.alpha_power;
             struct.alpha_coeff = medium.alpha_coeff;
         end
