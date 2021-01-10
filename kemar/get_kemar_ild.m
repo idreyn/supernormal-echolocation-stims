@@ -1,5 +1,4 @@
-function ild_truncated = get_kemar_ild(fs, hrirs)
-    passband = [1500, 6000];
+function ild_truncated = get_kemar_ild(fs, hrirs, passband)
     headings = 0:5:180;
     num_headings = size(headings, 2);
     ild = zeros(1, num_headings);

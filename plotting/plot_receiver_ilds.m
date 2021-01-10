@@ -12,13 +12,13 @@ function plot_receiver_ilds(head_radius_m, receiver_orientations, hrirs, compens
     title = strcat( ...
         'Receiver separation=', ... 
         string(receiver_separation_cm), 'cm', ...
-        ' (slowdown=', string(compensation_factor), 'x)');
+        ' (compensation=', string(compensation_factor), 'x)');
 
-    for i = 1:num_orientations
+    for i = 1:num_orientations-1
         for heading = headings
             [left_index, right_index] = get_receiver_indices(heading, compensation_factor);
 
-            left_hrir = hrirs(i, left_index + 1, :); 
+            left_hrir = hrirs(i, left_index, :); 
             right_hrir = hrirs(num_orientations - i, right_index, :);
 
             left_power = sum(left_hrir .^ 2);
@@ -30,13 +30,14 @@ function plot_receiver_ilds(head_radius_m, receiver_orientations, hrirs, compens
 
     colors = 0.75 * gray(num_orientations);
     figure;
+    
     sgtitle(title);
-    subplot(211);
+    subplot(311);
     imagesc(headings, receiver_orientations, ilds);
 
     xlabel('Echo azimuth (degrees)');
     ylabel({'Notch orientation'; 'Degrees from normal'});
-    subplot(212);
+    subplot(312);
     hold on
     for i = 1:num_orientations
         if i == (num_orientations + 1) / 2
@@ -49,4 +50,9 @@ function plot_receiver_ilds(head_radius_m, receiver_orientations, hrirs, compens
     end
     xlabel('Echo azimuth (degrees)');
     ylabel('ILD (dB SPL)');
+    
+    subplot(313);
+    plot(sum(ilds,2));
+    xlabel('Receiver index');
+    ylabel('"total" ILD (dB SPL)');
 end

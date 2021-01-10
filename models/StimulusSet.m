@@ -2,7 +2,7 @@ classdef StimulusSet
     properties
         fs = 44100
         hrir_included_distance_m = 1.4
-        azimuths_deg = -90:10:90
+        azimuths_deg = -90:5:90
         slowdowns = [7, 14, 21]
         % compensation_factor = slowdown / denominator, below
         % by convention, 0 is taken to mean the slowdown factor, so the
@@ -12,9 +12,8 @@ classdef StimulusSet
         % like 7/4 which are not easy to express in filenames.
         compensation_fractions_of_slowdown_denominator = [0, 4, 2, 1]
         pulse_length_s = 0.01
-        audible_chirp_frequency_band_hz = [1500, 3500]
+        audible_chirp_frequency_band_hz = [1500, 2700]
         chirp_kind = "quadratic"
         target_distances_cm = [300]
     end
 end
-
