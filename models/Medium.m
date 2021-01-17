@@ -1,10 +1,8 @@
 classdef Medium < handle
     properties
         params
-        sound_speed
         density
-        alpha_coeff
-        alpha_power
+        sound_speed
         sound_speed_ref
     end
     
@@ -16,8 +14,6 @@ classdef Medium < handle
             struct.density = medium.density;
             struct.sound_speed = medium.sound_speed;
             struct.sound_speed_ref = medium.sound_speed_ref;
-            struct.alpha_power = medium.alpha_power;
-            struct.alpha_coeff = medium.alpha_coeff;
         end
         
         function apply_mask(medium, material, mask)
