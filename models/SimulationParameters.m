@@ -84,7 +84,7 @@ classdef SimulationParameters
             c_max = max(max(medium.sound_speed));
             c_ref = medium.sound_speed_ref;
             dt_limit = 2 / (c_ref * k_max) * asin(c_ref / c_max);
-            dt = 5e-8; % set to 5e-8 for atten model;
+            dt = 0.5 * dt_limit;
             params.grid.setTime(round(params.t_end_s / dt), dt);
         end
     end
