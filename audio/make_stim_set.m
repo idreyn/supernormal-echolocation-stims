@@ -46,7 +46,7 @@ function make_stim_set(stim_set, fs, hrirs, kemar_fs, kemar_hrirs, target_direct
                 for compensation_denominator = stim_set.compensation_fractions_of_slowdown_denominator
                     compensation_factor = resolve_compensation_factor( ...
                         slowdown_factor, compensation_denominator);
-                    for orientation_type_idx = 1:2
+                    for orientation_type_idx = 2:2 % 1:2
                         if orientation_type_idx == 1
                             orientation_type = "normal";
                             orientation_index = 9;
@@ -124,15 +124,6 @@ function compensation_to_orientation_index = get_ild_matched_orientation_map( ..
                false);
            compensation_to_orientation_index(key) = ild_matched_orientation_index;
       end
-    end
-end
-
-
-function compensation = resolve_compensation_factor(slowdown, compensation_denominator)
-    if compensation_denominator == 0
-        compensation = 1;
-    else
-        compensation = slowdown / compensation_denominator;
     end
 end
 

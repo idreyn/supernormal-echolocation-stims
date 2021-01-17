@@ -15,8 +15,9 @@ function best_idx = get_ild_matched_orientation_for_compensation(hrirs, kemar_il
         hold on
         xlabel('Azimuth (degrees)');
         ylabel('ILD (dB)');
-        plot(kemar_ild(1:90))
+        plot(kemar_ild(1:90), '--')
         plot(best_ild(1:90))
+        legend('Kemar ILD', 'Synthetic ILD');
         hold off
     end
 end
