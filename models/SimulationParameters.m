@@ -58,7 +58,8 @@ classdef SimulationParameters
                 max_freq_hz double
                 grid_size_m double
                 desired_grid_resolution_m double
-                c_0 double = 343
+                c_0 double
+                t_end_s double
             end
             params.max_freq_hz = max_freq_hz;
             params.grid_size_m = grid_size_m;
@@ -71,7 +72,7 @@ classdef SimulationParameters
             params.grid_resolution_m = grid_resolution_m;
             params.c_0 = c_0;
             params.grid = kWaveGrid(grid_points, grid_resolution_m, grid_points, grid_resolution_m);
-            params.t_end_s = 0.5 * params.grid_size_m * sqrt(2) / c_0;
+            params.t_end_s = t_end_s;
 
         end
         

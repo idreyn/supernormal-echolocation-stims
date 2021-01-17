@@ -5,11 +5,23 @@ function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_
         receiver_orientation_deg double
         debug_plot logical = false
     end
+    
+    c_0 = 343;
+    total_system_radius_m = ( ...
+        experiment_params.head_radius_m + ...
+        experiment_params.foam_thickness_m + ...
+        experiment_params.headband_thickness_m);
+    impulse_distance_to_sensors = experiment_params.sensor_radius_m - total_system_radius_m;
+    silence_duration_s = impulse_distance_to_sensors / c_0;
+    system_duration_s = (2 * total_system_radius_m) / c_0;
 
     params = SimulationParameters( ...
        experiment_params.simulation_resolution_hz, ...
        2 * (experiment_params.sensor_radius_m + 0.1), ...
-       experiment_params.simulation_resolution_m)
+       experiment_params.simulation_resolution_m, ...
+       c_0, ...
+       silence_duration_s + system_duration_s);
+       
 
     medium = Medium(params, materials.air);
 
@@ -54,13 +66,7 @@ function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_
         sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor, 'DataCast', 'single');
     end
     
-    total_system_radius_m = ( ...
-        experiment_params.head_radius_m + ...
-        experiment_params.foam_thickness_m + ...
-        experiment_params.headband_thickness_m);
-    impulse_distance_to_sensors = experiment_params.sensor_radius_m - total_system_radius_m;
-    samples_of_silence = experiment_params.fs_hz * (impulse_distance_to_sensors / params.c_0);
-    
+    samples_of_silence = experiment_params.fs_hz * silence_duration_s;
     sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
     hrirs = resample_hrir(params, sensor_data_reordered, experiment_params.fs_hz, experiment_params.f_pass_hz);
     hrirs = hrirs(:,samples_of_silence:size(hrirs,2));
