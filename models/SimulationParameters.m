@@ -53,7 +53,7 @@ classdef SimulationParameters
             meters = params.grid_resolution_m * grid_points;
         end
         
-        function params = SimulationParameters(max_freq_hz, grid_size_m, desired_grid_resolution_m, c_0)
+        function params = SimulationParameters(max_freq_hz, grid_size_m, desired_grid_resolution_m, c_0, t_end_s)
             arguments
                 max_freq_hz double
                 grid_size_m double
