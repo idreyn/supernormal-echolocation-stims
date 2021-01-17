@@ -18,4 +18,6 @@ function all_hrirs = simulate_headband_for_each_receiver_orientation(experiment_
     for i = 1:num_notch_headings
         all_hrirs(i, :, :) = notch_hrirs_ca{i};
     end
+    max_value = max(max(max(all_hrirs)));
+    all_hrirs = all_hrirs / max_value;
 end
