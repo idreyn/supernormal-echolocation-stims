@@ -10,7 +10,7 @@ classdef HeadbandExperimentParameters
         receiver_orientations_deg (1,:) = -80:10:80
         receiver_focal_width_m = 0.01
         receiver_focus_offset_m = 0.01
-        impulse_pressure_pa {mustBeNumeric} = 1e3
+        impulse_pressure_pa {mustBeNumeric} = 1e2
         fs_hz {mustBeNumeric} = 192000 % Sampling rate used when working with audio
         f_pass_hz {mustBeNumeric} = 20000 % Minimum frequency of ultrasound
         noise_length_samples {mustBeNumeric} = 0
