@@ -54,8 +54,16 @@ function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_
         sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor, 'DataCast', 'single');
     end
     
+    total_system_radius_m = ( ...
+        experiment_params.head_radius_m + ...
+        experiment_params.foam_thickness_m + ...
+        experiment_params.headband_thickness_m);
+    impulse_distance_to_sensors = experiment_params.sensor_radius_m - total_system_radius_m;
+    samples_of_silence = experiment_params.fs_hz * (impulse_distance_to_sensors / params.c_0);
+    
     sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
     hrirs = resample_hrir(params, sensor_data_reordered, experiment_params.fs_hz, experiment_params.f_pass_hz);
+    hrirs = hrirs(:,samples_of_silence:size(hrirs,2));
     
     if debug_plot
         figure
