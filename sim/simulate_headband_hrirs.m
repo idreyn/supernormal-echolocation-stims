@@ -1,4 +1,4 @@
-figure
+function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_orientation_deg, debug_plot)
     arguments
         experiment_params HeadbandExperimentParameters
         materials MaterialsBank

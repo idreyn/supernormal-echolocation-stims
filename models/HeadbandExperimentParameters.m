@@ -7,7 +7,7 @@ classdef HeadbandExperimentParameters
         skull_thickness_m {mustBeNumeric} = 0.005
         headband_thickness_m {mustBeNumeric} = 0.02
         headings_deg (1,:) = 0:1:359
-        receiver_orientations_deg (1,:) = -80:10:80
+        receiver_orientations_deg (1,:) = -80:5:80
         receiver_focal_width_m = 0.01
         receiver_focus_offset_m = 0.01
         impulse_pressure_pa {mustBeNumeric} = 1
