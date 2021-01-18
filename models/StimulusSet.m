@@ -1,7 +1,6 @@
 classdef StimulusSet
     properties
         fs = 44100
-        hrir_included_distance_m = 1.4
         azimuths_deg = -90:5:90
         slowdowns = [12, 16, 20]
         % compensation_factor = slowdown / denominator, below
