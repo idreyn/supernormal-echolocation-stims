@@ -2,7 +2,7 @@ function make_stim_set(stim_set, fs, hrirs, kemar_fs, kemar_hrirs, target_direct
     arguments
         stim_set StimulusSet
         fs {mustBeNumeric}
-        hrirs (17,360,:)
+        hrirs (:,360,:)
         kemar_fs {mustBeNumeric}
         kemar_hrirs (73,2,:)
         target_directory string
@@ -61,7 +61,6 @@ function make_stim_set(stim_set, fs, hrirs, kemar_fs, kemar_hrirs, target_direct
                             hrirs, ... 
                             fs, ...
                             ultrasound_pulse, ...
-                            stim_set.hrir_included_distance_m, ...
                             target_distance_cm / 100, ...
                             target_azimuth_deg, ...
                             slowdown_factor, ...
@@ -107,7 +106,7 @@ function compensation_to_orientation_index = get_ild_matched_orientation_map( ..
     kemar_hrirs)
     arguments
         stim_set StimulusSet
-        hrirs (17,360,:)
+        hrirs (:,360,:)
         kemar_fs {mustBeNumeric}
         kemar_hrirs (73,2,:)
     end
