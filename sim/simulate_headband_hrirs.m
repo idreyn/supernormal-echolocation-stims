@@ -66,7 +66,7 @@ function hrirs = simulate_headband_hrirs(experiment_params, materials, receiver_
         sensor_data = kspaceFirstOrder2D(params.grid, get_struct(medium), source, sensor, 'DataCast', 'single');
     end
     
-    samples_of_silence = experiment_params.fs_hz * silence_duration_s;
+    samples_of_silence = round(experiment_params.fs_hz * silence_duration_s);
     sensor_data_reordered = reorderSensorData(params.grid, sensor, sensor_data);
     hrirs = resample_hrir(params, sensor_data_reordered, experiment_params.fs_hz, experiment_params.f_pass_hz);
     hrirs = hrirs(:,samples_of_silence:size(hrirs,2));
