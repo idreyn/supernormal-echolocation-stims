@@ -1,7 +1,9 @@
-function compensation = resolve_compensation_factor(slowdown, compensation_denominator)
-    if compensation_denominator == 0
-        compensation = 1;
+function compensation = resolve_compensation_factor(slowdown, compensation_descriptor)
+    if string(compensation_descriptor) == "full"
+        compensation = slowdown;
+    elseif string(compensation_descriptor) == "half"
+        compensation = slowdown / 2;
     else
-        compensation = slowdown / compensation_denominator;
+        compensation = compensation_descriptor;
     end
 end

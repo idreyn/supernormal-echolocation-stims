@@ -17,7 +17,7 @@ function plot_stereo_gain_patterns(experiment_params, hrirs, compensation_factor
     polarplot(headings * pi / 180, right_energies_db);
     receiver_normal_deg = get_receiver_heading_offset_for_compensation(compensation_factor);
     for heading = [0 - receiver_normal_deg, receiver_normal_deg]
-        if heading > 0
+        if heading < 0
             color_normal = 'red';
             color_orientation = 'red';
         else
